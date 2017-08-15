@@ -24,7 +24,7 @@ endif
 bin_PROGRAMS = ss-local
 #bin_PROGRAMS += ss-tunnel
 if !BUILD_WINCOMPAT
-#bin_PROGRAMS += ss-server ss-manager
+bin_PROGRAMS += ss-server #ss-manager
 endif
 
 sni_src = http.c \
@@ -51,18 +51,18 @@ ss_local_SOURCES = utils.c \
 #                    netutils.c \
 #                    tunnel.c
 #
-#ss_server_SOURCES = utils.c \
-#                    netutils.c \
-#                    jconf.c \
-#                    json.c \
-#                    encrypt.c \
-#                    udprelay.c \
-#                    cache.c \
-#                    acl.c \
-#                    resolv.c \
-#                    server.c \
-#                    $(sni_src)
-#
+ss_server_SOURCES = utils.c \
+                    netutils.c \
+                    jconf.c \
+                    json.c \
+                    encrypt.c \
+                    udprelay.c \
+                    cache.c \
+                    acl.c \
+                    resolv.c \
+                    server.c \
+                    $(sni_src)
+
 #ss_manager_SOURCES = utils.c \
 #                     jconf.c \
 #                     json.c \
@@ -70,21 +70,21 @@ ss_local_SOURCES = utils.c \
 
 ss_local_LDADD = $(SS_COMMON_LIBS)
 #ss_tunnel_LDADD = $(SS_COMMON_LIBS)
-#ss_server_LDADD = $(SS_COMMON_LIBS)
+ss_server_LDADD = $(SS_COMMON_LIBS)
 #ss_manager_LDADD = $(SS_COMMON_LIBS)
 if USE_SYSTEM_SHARED_LIB
 ss_local_LDADD += -ludns
 #ss_tunnel_LDADD += -ludns
-#ss_server_LDADD += -ludns
+ss_server_LDADD += -ludns
 else
 ss_local_LDADD += $(top_builddir)/libudns/libudns.la
 #ss_tunnel_LDADD += $(top_builddir)/libudns/libudns.la
-#ss_server_LDADD += $(top_builddir)/libudns/libudns.la
+ss_server_LDADD += $(top_builddir)/libudns/libudns.la
 endif
 
 ss_local_CFLAGS = $(AM_CFLAGS) -DMODULE_LOCAL
 #ss_tunnel_CFLAGS = $(AM_CFLAGS) -DMODULE_TUNNEL
-#ss_server_CFLAGS = $(AM_CFLAGS) -DMODULE_REMOTE
+ss_server_CFLAGS = $(AM_CFLAGS) -DMODULE_REMOTE
 #ss_manager_CFLAGS = $(AM_CFLAGS) -DMODULE_MANAGER
 
 if BUILD_WINCOMPAT
