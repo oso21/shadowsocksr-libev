@@ -73,7 +73,7 @@ endif ()
 add_executable(ss_local ${SOURCE_FILES_LOCAL})
 #add_executable(ss_tunnel ${SOURCE_FILES_TUNNEL})
 add_executable(ss_server ${SOURCE_FILES_SERVER})
-#add_executable(ss_manager ${SOURCE_FILES_MANAGER})
+add_executable(ss_manager ${SOURCE_FILES_MANAGER})
 add_executable(ss_redir ${SOURCE_FILES_REDIR})
 add_library(libshadowsocks-libev ${SOURCE_FILES_LOCAL})
 
@@ -86,9 +86,9 @@ set_target_properties(ss_local PROPERTIES
 set_target_properties(ss_server PROPERTIES
         COMPILE_DEFINITIONS MODULE_REMOTE
         )
-#set_target_properties(ss_manager PROPERTIES
-#        COMPILE_DEFINITIONS MODULE_MANAGER
-#        )
+set_target_properties(ss_manager PROPERTIES
+        COMPILE_DEFINITIONS MODULE_MANAGER
+        )
 set_target_properties(ss_redir PROPERTIES
         COMPILE_DEFINITIONS MODULE_REDIR
         )
@@ -124,9 +124,9 @@ target_link_libraries(ss_local
 target_link_libraries(ss_server
         ${ss_lib_net}
         )
-#target_link_libraries(ss_manager
-#        ${ss_lib_common}
-#        )
+target_link_libraries(ss_manager
+        ${ss_lib_common}
+        )
 target_link_libraries(ss_redir
         ${ss_lib_net}
         )
